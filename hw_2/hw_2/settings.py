@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Мой модули
-    'students',
-    'subjects',
-    'rest_framework',
+    "students",
+    "subjects",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
