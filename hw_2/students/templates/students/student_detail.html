@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ student.name }} {{ student.surname }}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+        }
+        h1 { 
+            color: #333; 
+        }
+        .info {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ student.name }} {{ student.surname }}</h1>
+    <div class="info">
+        <p><strong>Специальность:</strong> {{ student.major }}</p>
+        <p><strong>Курс:</strong> {{ student.year_of_study }}</p>
+        <p><strong>Факультет:</strong> {{ student.faculty }}</p>
+    </div>
+    <a href="{% url 'student-list' %}" class="back-link">Вернуться к списку студентов</a>
+</body>
+</html> 

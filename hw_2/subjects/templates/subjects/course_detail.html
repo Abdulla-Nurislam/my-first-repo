@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ course.title }}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+        }
+        h1 { 
+            color: #333; 
+        }
+        .info {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ course.title }}</h1>
+    <div class="info">
+        <p><strong>Преподаватель:</strong> {{ course.author }}</p>
+        <p><strong>Описание:</strong></p>
+        <p>{{ course.text }}</p>
+    </div>
+    <a href="{% url 'course-list' %}" class="back-link">Вернуться к списку курсов</a>
+</body>
+</html> 
