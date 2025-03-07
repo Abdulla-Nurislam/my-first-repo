@@ -1,23 +1,11 @@
-# Импортируем модуль models из Django для создания моделей базы данных
 from django.db import models
 
+# Create your models here.
 
-# Создаём модель Courses (курсы), наследуемся от models.Model
-# Примечание: обычно название модели пишется в единственном числе (Course), 
-# но оставим как есть
-class Courses(models.Model):
-    # Название курса, максимальная длина 100 символов
+class Course(models.Model):
     title = models.CharField(max_length=100)
-    
-    # Описание курса, максимальная длина 255 символов
-    # Лучше использовать models.TextField() для длинных текстов,
-    # если нет строгого ограничения по длине
-    text = models.CharField(max_length=255)
-    
-    # Имя автора курса, максимальная длина 100 символов
+    text = models.CharField(max_length=500)
     author = models.CharField(max_length=100)
 
-    # Метод для строкового представления объекта
-    # Будет использоваться в админ-панели и при выводе курса
     def __str__(self):
-        return self.title
+        return f"{self.title} (Преподаватель: {self.author})"

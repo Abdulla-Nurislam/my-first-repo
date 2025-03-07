@@ -1,22 +1,24 @@
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from django.shortcuts import render
 from .models import Student
 from .serializers import StudentSerializer
 
+# Create your views here.
 
-# Добавляем функцию для рендеринга главной страницы
-def index(request):
-    # Получаем всех студентов из базы данных
+# HTML Views
+def student_list(request):
     students = Student.objects.all()
-    # Передаем их в шаблон
-    return render(request, "students/index.html", {"students": students})
+    return render(request, 'students/student_list.html', {'students': students})
 
+def student_detail(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    return render(request, 'students/student_detail.html', {'student': student})
 
-class StudentList(generics.ListCreateAPIView):
+# API Views
+class StudentListAPI(generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-
-class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+class StudentDetailAPI(generics.RetrieveAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

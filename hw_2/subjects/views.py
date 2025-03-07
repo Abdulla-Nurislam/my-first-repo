@@ -1,19 +1,24 @@
-# Импортируем необходимые компоненты из Django REST framework
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
-from .models import Courses
-from .serializers import CoursesSerializer
+from .models import Course
+from .serializers import CourseSerializer
 
+# Create your views here.
 
-# Представление для списка курсов (GET) и создания нового курса (POST)
-class CoursesList(generics.ListCreateAPIView):
-    # Получаем все объекты модели Courses
-    queryset = Courses.objects.all()
-    # Указываем сериализатор для преобразования данных
-    serializer_class = CoursesSerializer
+# HTML Views
+def course_list(request):
+    courses = Course.objects.all()
+    return render(request, 'subjects/course_list.html', {'courses': courses})
 
+def course_detail(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    return render(request, 'subjects/course_detail.html', {'course': course})
 
-# Представление для получения деталей курса (GET), 
-# обновления (PUT/PATCH) и удаления (DELETE) конкретного курса
-class CoursesDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Courses.objects.all()
-    serializer_class = CoursesSerializer
+# API Views
+class CourseListAPI(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+class CourseDetailAPI(generics.RetrieveAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
