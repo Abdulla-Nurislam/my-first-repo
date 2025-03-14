@@ -1,0 +1,73 @@
+@startuml
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <i>x</i>
+
+Table(User, "User") {
+    primary_key(id)
+    username
+    email
+    password
+}
+
+Table(Profile, "Profile") {
+    primary_key(id)
+    foreign_key(user_id)
+    bio
+    location
+    birth_date
+    avatar
+}
+
+Table(Blog, "Blog") {
+    primary_key(id)
+    name
+    description
+    foreign_key(owner_id)
+    created_at
+}
+
+Table(Post, "Post") {
+    primary_key(id)
+    title
+    content
+    foreign_key(blog_id)
+    foreign_key(author_id)
+    created_at
+    updated_at
+}
+
+Table(Comment, "Comment") {
+    primary_key(id)
+    foreign_key(post_id)
+    foreign_key(author_id)
+    content
+    created_at
+}
+
+Table(Like, "Like") {
+    primary_key(id)
+    foreign_key(post_id)
+    foreign_key(user_id)
+    created_at
+}
+
+Table(Followers, "Followers") {
+    primary_key(id)
+    foreign_key(follower_id)
+    foreign_key(following_id)
+    created_at
+}
+
+User "1" -- "1" Profile
+User "1" -- "*" Blog
+User "1" -- "*" Post
+User "1" -- "*" Comment
+User "1" -- "*" Like
+Blog "1" -- "*" Post
+Post "1" -- "*" Comment
+Post "1" -- "*" Like
+User "1" -- "*" Followers : follower
+User "1" -- "*" Followers : following
+
+@enduml 
